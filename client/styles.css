@@ -102,4 +102,31 @@ header {
   border-top: 1px solid black;
   background-color: #fff;
   position: relative;
+  display: flex;
+}
+
+.scoreboard__frame {
+  flex: 1 1 auto;
+  border: 1px solid black;
+  position: relative;
+}
+
+.frame__bowl-scores {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 3em;
+  height: 2em;
+  border-left: 1px solid black;
+  border-bottom: 1px solid black;
+  display: flex;
+}
+
+.frame__first-bowl,
+.frame__second-bowl {
+  flex: 1 1 auto;
+}
+
+.frame__first-bowl {
+  border-right: 1px solid black;
 }

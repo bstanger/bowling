@@ -7,8 +7,9 @@ export class Game extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      currentPins: [1,1,1,1,1,1,1,1,1,1],
-      currentFrameBallsLeft: 2
+      currentPins: [1,1,1,1,1,1,1,1,1,1], // Could be moved to alley?
+      currentFrameBallsLeft: 2,
+      currentRoll: 0
     }
   }
 
@@ -55,7 +56,7 @@ export class Game extends React.Component {
     return (
       <div className="main-body">
         <CurrentPlay currentPins={this.state.currentPins} onKeypadClick={this.inputPinNumber.bind(this)} />
-        <Scoreboard scoreboard={this.state.scoreboard} />
+        <Scoreboard currentRoll={this.state.currentRoll} />
       </div>
     )
   }
