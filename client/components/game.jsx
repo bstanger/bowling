@@ -9,7 +9,8 @@ export class Game extends React.Component {
     this.state = {
       currentPins: [1,1,1,1,1,1,1,1,1,1], // Could be moved to alley?
       currentFrameBallsLeft: 2,
-      currentRoll: 0
+      currentBowl: 0,
+      currentFrame: 0
     }
   }
 
@@ -17,22 +18,27 @@ export class Game extends React.Component {
     let pinsToRemove = num.idx;
     let pinsRemoved = 0;
     let currPinsCopy = this.state.currentPins.slice();
-    for(var i = 0; i < currPinsCopy.length; i++){
-      if(currPinsCopy[i] === 1){
-        currPinsCopy[i] = 0;
-        ++pinsRemoved;
-        if(pinsRemoved === (num.idx)){
-          break;
+    if(pinsToRemove){
+      for(var i = 0; i < currPinsCopy.length; i++){
+        if(currPinsCopy[i] === 1){
+          currPinsCopy[i] = 0;
+          ++pinsRemoved;
+          if(pinsRemoved === (num.idx)){
+            break;
+          }
         }
       }
     }
-    this.updatePinsAfterBowl(currPinsCopy);
+    this.updatePinsAfterBowl(currPinsCopy, pinsRemoved);
   }
 
-  updatePinsAfterBowl(newPins){
+  updatePinsAfterBowl(newPins, currentBowl){
+    let newCurentFrame = (this.state.currentFrameBallsLeft === 1) ? (this.state.currentFrame + 1) : this.state.currentFrame;
     this.setState(
       {currentPins: newPins,
-      currentFrameBallsLeft: this.state.currentFrameBallsLeft - 1},
+      currentFrameBallsLeft: this.state.currentFrameBallsLeft - 1,
+      currentBowl: currentBowl,
+      currentFrame: newCurentFrame},
       () => {
         console.log('State updated!');
         setTimeout(() => {
@@ -56,7 +62,7 @@ export class Game extends React.Component {
     return (
       <div className="main-body">
         <CurrentPlay currentPins={this.state.currentPins} onKeypadClick={this.inputPinNumber.bind(this)} />
-        <Scoreboard currentRoll={this.state.currentRoll} />
+        <Scoreboard currentBowl={this.state.currentBowl} currentFrame={this.state.currentFrame} currentFrameBallsLeft={this.state.currentFrameBallsLeft}/>
       </div>
     )
   }
