@@ -33,16 +33,17 @@ export class Game extends React.Component {
   }
 
   updatePinsAfterBowl(newPins, currentBowl){
-    let newCurentFrame = (this.state.currentFrameBallsLeft === 1) ? (this.state.currentFrame + 1) : this.state.currentFrame;
+    let islastBall = (this.state.currentFrameBallsLeft === 1);
+    let newCurentFrame = islastBall ? (this.state.currentFrame + 1) : this.state.currentFrame;
+    let newBallsLeft = islastBall ? 2 : 1;
     this.setState(
       {currentPins: newPins,
-      currentFrameBallsLeft: this.state.currentFrameBallsLeft - 1,
+      currentFrameBallsLeft: newBallsLeft,
       currentBowl: currentBowl,
       currentFrame: newCurentFrame},
       () => {
-        console.log('State updated!');
         setTimeout(() => {
-          if(this.state.currentFrameBallsLeft === 0){
+          if(islastBall){
             this.resetCurrentFrame();
           }
         }, 1000);
@@ -52,10 +53,7 @@ export class Game extends React.Component {
 
   resetCurrentFrame(){
     console.log('resetting frame');
-    this.setState(
-      {currentFrameBallsLeft: 2,
-      currentPins: [1,1,1,1,1,1,1,1,1,1]}
-    )
+    this.setState({currentPins: [1,1,1,1,1,1,1,1,1,1] });
   }
 
   render(){

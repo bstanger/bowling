@@ -12,15 +12,16 @@ export class Scoreboard extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    // Don't update if just changed current pins
+    if(nextProps.currentFrameBallsLeft === this.props.currentFrameBallsLeft){
+      return;
+    }
     let framesCopy = this.state.frames.slice();
     let currentFrameTuple = framesCopy[this.props.currentFrame];
-    console.log(currentFrameTuple);
-    console.log(2 - this.props.currentFrameBallsLeft);
-    currentFrameTuple[2 - this.props.currentFrameBallsLeft] = nextProps.currentBowl;
-    console.log('updated tuple ', currentFrameTuple);
-    this.setState({
-      frames: framesCopy
-    })
+    if(currentFrameTuple.length < 2){ // Should use better tactic than this
+      currentFrameTuple.push(nextProps.currentBowl);
+    }
+    this.setState({ frames: framesCopy });
   }
 
 
