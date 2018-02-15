@@ -25,6 +25,10 @@ header {
   flex: 1 1 auto;
   background-image: url('./images/disco-lights.gif');
   background-size: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .current-play__opacity {
@@ -33,7 +37,7 @@ header {
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: rgba(255,255,255,0.35);
+  background-color: rgba(255,255,255,0.2);
 }
 
 /* .current-play__alley-img {
@@ -45,9 +49,50 @@ header {
   height: 100%;
 } */
 
-.current-play__keypad{
-  flex: 0 0 250px;
-  border-left: 1px solid black;
+.current-play__pins {
+  display: flex;
+  flex-direction: row-reverse;
+  flex: 0 1 auto;
+  margin-right: 8em;
+}
+
+.current-play__pin {
+  position: relative;
+  /* display: inline-block; */
+  background: url('./images/pin4.png') center center no-repeat;
+  background-size: contain;
+  width: 4em;
+  height: 11em;
+}
+
+.current-play__pin.is-hidden {
+  visibility: hidden;
+}
+
+/*/////////////////////////////////////*/
+
+.current-play__keypad {
+  width: 250px;
+  height: 300px;
+  position: absolute;
+  background: #fff;
+  right: 0;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-template-rows: auto auto auto auto;
+}
+
+.keypad__key {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  cursor: pointer;
+}
+
+.keypad__key:hover {
+  background-color: grey;
 }
 
 /*/////////////////////////////////////*/

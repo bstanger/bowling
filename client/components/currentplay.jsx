@@ -6,7 +6,7 @@ import Keypad from './keypad.jsx'
 let CurrentPlay = ({currentPins, onKeypadClick}) => (
   <section className="current-play">
     <Alley currentPins={currentPins}/>
-    <Keypad />
+    <Keypad onKeypadClick={onKeypadClick}/>
   </section>
 )
 

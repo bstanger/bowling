@@ -1,8 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-let Scoreboard = (props) => (
-  <aside className="scoreboard"></aside>
-)
+export class Scoreboard extends React.Component {
 
-export default Scoreboard
+  render(){
+    return (
+      <aside className="scoreboard"></aside>
+    )
+  }
+}
