@@ -1,4 +1,5 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { Game } from './components/game.jsx'
 
-ReactDOM.render(<h1>Alley!</h1>, document.getElementById('alley'));
+ReactDOM.render(<Game />, document.getElementById('game'));

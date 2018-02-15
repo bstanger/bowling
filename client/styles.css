@@ -1,15 +1,60 @@
 body {
   margin: 0;
 }
-.main-body {
-  display: flex;
+
+header {
+  height: 50px;
+  background-color: #000;
 }
 
-#alley {
+.main-body {
+  display: flex;
+  flex-flow: column;
+  height: 100vh;
+}
+
+/*/////////////////////////////////////*/
+
+.current-play {
+  display: flex;
   flex: 1 1 auto;
 }
 
-#scoreboard {
-  flex: 1 1 250px;
+.current-play__alley {
+  position: relative;
+  flex: 1 1 auto;
+  background-image: url('./images/disco-lights.gif');
+  background-size: cover;
+}
+
+.current-play__opacity {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(255,255,255,0.35);
+}
+
+/* .current-play__alley-img {
+  display: block;
+  background: url(./images/Bowling_Alley.png) no-repeat;
+  background-size: contain;
+  background-position-y: 260px;
+  width: 100%;
+  height: 100%;
+} */
+
+.current-play__keypad{
+  flex: 0 0 250px;
   border-left: 1px solid black;
+}
+
+/*/////////////////////////////////////*/
+
+.scoreboard {
+  flex: 0 0 170px;
+  border-top: 1px solid black;
+  background-color: #fff;
+  position: relative;
 }
