@@ -8,9 +8,10 @@ export class Game extends React.Component {
     super(props)
     this.state = {
       currentPins: [1,1,1,1,1,1,1,1,1,1], // Could be moved to alley?
-      currentFrameBallsLeft: 2,
+      currentSubFrame: "A",
       currentBowl: 0,
-      currentFrame: 0
+      currentFrame: 0,
+      frameResetting: false
     }
   }
 
@@ -33,17 +34,21 @@ export class Game extends React.Component {
   }
 
   updatePinsAfterBowl(newPins, currentBowl){
-    let islastBall = (this.state.currentFrameBallsLeft === 1);
-    let newCurentFrame = islastBall ? (this.state.currentFrame + 1) : this.state.currentFrame;
-    let newBallsLeft = islastBall ? 2 : 1;
+    let islastBall = (this.state.currentSubFrame === "B");
+    let isStrike = (!islastBall && currentBowl === 10);
+    let newFrameResetting = (islastBall || isStrike);
+    let newCurentFrame = newFrameResetting ? (this.state.currentFrame + 1) : this.state.currentFrame;
+    let newSubframe = (islastBall) ? "C" : "B";
     this.setState(
       {currentPins: newPins,
-      currentFrameBallsLeft: newBallsLeft,
+      currentSubFrame: newSubframe,
       currentBowl: currentBowl,
-      currentFrame: newCurentFrame},
+      currentFrame: newCurentFrame,
+      frameResetting: false
+    },
       () => {
         setTimeout(() => {
-          if(islastBall){
+          if(islastBall || isStrike){
             this.resetCurrentFrame();
           }
         }, 1000);
@@ -52,15 +57,18 @@ export class Game extends React.Component {
   }
 
   resetCurrentFrame(){
-    console.log('resetting frame');
-    this.setState({currentPins: [1,1,1,1,1,1,1,1,1,1] });
+    this.setState({
+      currentPins: [1,1,1,1,1,1,1,1,1,1],
+      currentSubFrame: "A",
+      frameResetting: true
+    });
   }
 
   render(){
     return (
       <div className="main-body">
         <CurrentPlay currentPins={this.state.currentPins} onKeypadClick={this.inputPinNumber.bind(this)} />
-        <Scoreboard currentBowl={this.state.currentBowl} currentFrame={this.state.currentFrame} currentFrameBallsLeft={this.state.currentFrameBallsLeft}/>
+        <Scoreboard currentBowl={this.state.currentBowl} currentFrame={this.state.currentFrame} currentSubFrame={this.state.currentSubFrame} frameResetting={this.state.frameResetting}/>
       </div>
     )
   }
